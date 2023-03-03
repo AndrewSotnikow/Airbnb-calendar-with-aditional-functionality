@@ -1,0 +1,325 @@
+/* ==========================================================================
+	Calendar
+	========================================================================== */
+
+@use '../../../../css/base' as *;
+
+/********************************************************/
+
+.c-calendar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 32px 0;
+
+    @include respond-below(md) {
+        padding: 0;
+    }
+
+    &_title {
+        border-bottom: 1px solid $color_stroke;
+    }
+
+    &_container {
+        width: 100vw;
+        max-width: 716px;
+        height: 100vh;
+        max-height: 377px;
+
+        @include respond-below(lg) {
+            min-width: 308px;
+            max-width: 100%;
+            min-height: 323px;
+            border-bottom: 0;
+        }
+    }
+    // Calendar main container and navigation
+    .DateRangePickerInput {
+        border: 0;
+    }
+    .DateRangePicker_picker {
+        position: relative;
+        top: 0 !important;
+    }
+
+    .DateRangePicker_picker {
+        overflow: hidden;
+
+        @include respond-below(lg) {
+            left: 0 !important;
+        }
+    }
+    // Inner container and transition container
+    .DayPicker {
+        display: flex;
+        justify-content: center;
+        width: 100% !important;
+        height: 100% !important;
+        & > div:first-child {
+            & > div:first-child {
+                width: 100vw !important; //do not delete
+                max-width: 716px !important;
+                height: 100vh !important; //do not delete
+                max-height: 377px !important;
+
+                @include respond-below(lg) {
+                    width: 100% !important; //do not delete
+                    min-width: 308px !important;
+                    height: 100% !important; //do not delete
+                    min-height: 323px !important;
+                }
+            }
+        }
+    }
+
+    .DayPicker_transitionContainer {
+        width: 100vw !important; //do not delete
+        max-width: 716px !important; //do not delete
+        height: 100vh !important; //do not delete
+        max-height: 377px !important; //do not delete
+        overflow: hidden;
+
+        @include respond-below(lg) {
+            box-sizing: content-box;
+            width: 100% !important; //do not delete
+            min-width: 308px !important; //do not delete
+            height: 100% !important; //do not delete
+            min-height: 323px !important; //do not delete
+        }
+    }
+
+    .DayPicker__withBorder {
+        box-shadow: none !important;
+    }
+
+    // Days names
+    .DayPicker_weekHeaders__horizontal {
+        margin-left: 0 !important;
+    }
+
+    .DayPicker_weekHeader {
+        padding: 0 !important;
+        margin-top: -1px;
+        @include respond-below(lg) {
+            top: 36px;
+        }
+    }
+
+    .DayPicker_weekHeader_1:last-child {
+        left: 365px !important;
+
+        @include respond-below(lg) {
+            left: 0 !important;
+        }
+    }
+
+    .DayPicker_weekHeader_li {
+        @include typo_aeonik_12-14;
+        margin-right: 10px;
+        color: $color_cinder;
+
+        @include respond-below(lg) {
+            margin-right: 5px;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    // Days grid
+    .CalendarMonth_table {
+        width: 100%;
+    }
+    .CalendarMonthGrid {
+        left: 1px;
+    }
+
+    .CalendarMonth {
+        box-sizing: content-box;
+        width: 100%;
+        max-width: 343px;
+        height: 100%;
+        max-height: 292px;
+        padding: 0 28px 0 0 !important;
+
+        @include respond-below(lg) {
+            width: 305px;
+            padding: 0 !important;
+        }
+    }
+
+    .CalendarMonth_caption {
+        @include typo_aeonik_14-16;
+        padding-top: 28px;
+        padding-bottom: 42px;
+        text-transform: capitalize;
+        @include respond-below(lg) {
+            padding-top: 0;
+        }
+    }
+
+    // Days grid navigation
+    .DayPickerNavigation_leftButton__horizontalDefault {
+        top: 24px;
+        left: 0;
+        height: 20px;
+        color: $color_cinder;
+        background: url('../../../../images/icons/arrows/arrow-left.svg')
+            no-repeat !important;
+        border: 0;
+        @include respond-below(lg) {
+            top: 0;
+        }
+
+        svg {
+            display: none;
+        }
+    }
+
+    .DayPickerNavigation_rightButton__horizontalDefault {
+        top: 24px;
+        right: 13px;
+        width: 20px;
+        height: 20px;
+        font-weight: 700;
+        color: $color_cinder;
+        background: url('../../../../images/icons/arrows/arrow-right.svg')
+            no-repeat !important;
+        border: 0;
+
+        @include respond-below(lg) {
+            top: 0;
+            right: 0;
+        }
+
+        svg {
+            display: none;
+        }
+    }
+
+    .DayPickerNavigation_svg__horizontal {
+        fill: $color_cinder;
+    }
+
+    button.DayPickerKeyboardShortcuts_buttonReset {
+        display: none;
+    }
+
+    // Days grid items
+    .CalendarDay {
+        @include typo_aeonik_12-14;
+        z-index: 1;
+        width: 48px !important;
+        height: 48px !important;
+        padding: 8px;
+        font-weight: 400;
+        color: $color_cinder;
+        text-align: start;
+        vertical-align: top;
+        background: none;
+        border: 1px solid $color_grey-3;
+
+        @include respond-below(lg) {
+            width: 44px !important;
+            height: 44px !important;
+        }
+
+        &:hover {
+            @include respond-above(md) {
+                position: relative;
+                background: none;
+                &::after {
+                    position: absolute;
+                    top: 4px;
+                    left: 4px;
+                    z-index: -1;
+                    width: 40px !important;
+                    height: 40px !important;
+                    content: ' ';
+                    border: 1px solid $color_cinder;
+                }
+            }
+        }
+    }
+    .CalendarDay__selected,
+    .CalendarDay__selected_span {
+        position: relative;
+        z-index: 1;
+        font-weight: 700;
+        background: none;
+        &::before {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: -1;
+            width: 42px !important;
+            height: 42px !important;
+            content: ' ';
+            background-color: $color_pearl_bush;
+            border-top: 1px solid $color_cinder;
+            border-right: 1px solid $color_cinder;
+            border-bottom: 3px solid $color_cinder;
+            border-left: 1px solid $color_cinder;
+
+            @include respond-below(md) {
+                top: 2px;
+                left: 2px;
+                width: 37px !important;
+                height: 37px !important;
+            }
+        }
+    }
+    .CalendarDay__hovered_span:hover,
+    .CalendarDay__hovered_span {
+        &:hover {
+            @include respond-above(md) {
+                position: relative;
+                background: none;
+                &::after {
+                    position: absolute;
+                    top: 4px;
+                    left: 4px;
+                    z-index: -1;
+                    width: 40px !important;
+                    height: 40px !important;
+                    content: ' ';
+                    border: 1px solid $color_cinder;
+                }
+            }
+        }
+    }
+
+    .CalendarDay__hovered_offset {
+        @include respond-above(md) {
+            position: relative;
+            background: none;
+            &::after {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                z-index: -1;
+                width: 40px !important;
+                height: 40px !important;
+                content: ' ';
+                border: 1px solid $color_cinder;
+            }
+        }
+    }
+    .CalendarDay__blocked_calendar,
+    .CalendarDay__blocked_out_of_range {
+        color: rgba($color_cinder, 0.5);
+        background: $color_grey !important;
+        &::after {
+            background: $color_grey !important;
+            border: 0 !important;
+        }
+    }
+    &.-scrollMargin {
+        @include respond-below(md) {
+            scroll-margin-top: 96px;
+            scroll-snap-margin-top: 96px;
+        }
+    }
+}
